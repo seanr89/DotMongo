@@ -1,0 +1,7 @@
+version: '3.8'
+
+networks:
+    dockerapi-dev:
+        driver: bridge
+
+services:
