@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoAPI.Models;
+using MongoAPI.Services;
 
 namespace MongoAPI.Controllers;
 
@@ -7,28 +8,28 @@ namespace MongoAPI.Controllers;
 [Route("[controller]")]
 public class EventController : ControllerBase
 {
-    public EventController()
+    private readonly EventService _eventService;
+    public EventController(EventService eventService)
     {
-        
+        this._eventService = eventService;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Event>>> GetAll()
     {
-        throw new NotImplementedException();
-        // var students = await _studentService.GetAllAsync();
-        // return Ok(students);
+        //throw new NotImplementedException();
+        var data = await _eventService.GetAllAsync();
+        return Ok(data);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Event>> GetById(string id)
     {
-        throw new NotImplementedException();
-        // var student = await _studentService.GetByIdAsync(id);
-        // if (student == null)
-        // {
-        //     return NotFound();
-        // }
+        var evnt = await _eventService.GetByIdAsync(id);
+        if (evnt == null)
+        {
+            return NotFound();
+        }
 
         // if (student.Courses.Count > 0)
         // {
@@ -42,7 +43,7 @@ public class EventController : ControllerBase
         //     student.CourseList = tempList;
         // }
 
-        // return Ok(student);
+        return Ok(evnt);
     }
 
     [HttpPost]
@@ -52,10 +53,10 @@ public class EventController : ControllerBase
         {
             return BadRequest();
         }
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
 
-        // await _studentService.CreateAsync(student);
-        // return Ok(student);
+        await _eventService.CreateAsync(evnt);
+        return Ok(evnt);
     }
 
     [HttpPut]

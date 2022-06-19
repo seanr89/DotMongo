@@ -24,4 +24,17 @@ public class EventService
     {
         return await _events.Find<Event>(s => s.Id == id).FirstOrDefaultAsync();
     }
+    public async Task<Event> CreateAsync(Event evnt)
+    {
+        await _events.InsertOneAsync(evnt);
+        return evnt;
+    }
+    public async Task UpdateAsync(Guid id, Event evnt)
+    {
+        await _events.ReplaceOneAsync(s => s.Id == id, evnt);
+    }
+    public async Task DeleteAsync(Guid id)
+    {
+        await _events.DeleteOneAsync(s => s.Id == id);
+    }
 }
