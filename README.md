@@ -11,3 +11,11 @@ connect to docker instance `docker exec -it some-mongo /bin/bash`
 connect to mongo `mongo`
 
 create db `use EventDb`
+
+
+## Docker Compose
+run cmd `docker compose -f docker-compose.dev.yml up -d mongo-cont`
+
+stop compose `docker-compose stop`
+
+remove compose `docker-compose down`

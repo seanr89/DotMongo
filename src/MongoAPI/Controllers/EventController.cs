@@ -17,13 +17,12 @@ public class EventController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Event>>> GetAll()
     {
-        //throw new NotImplementedException();
         var data = await _eventService.GetAllAsync();
         return Ok(data);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Event>> GetById(string id)
+    public async Task<ActionResult<Event>> GetById(Guid id)
     {
         var evnt = await _eventService.GetByIdAsync(id);
         if (evnt == null)
@@ -53,42 +52,38 @@ public class EventController : ControllerBase
         {
             return BadRequest();
         }
-        //throw new NotImplementedException();
 
         await _eventService.CreateAsync(evnt);
         return Ok(evnt);
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(string id, Event updatedEvent)
+    public async Task<IActionResult> Update(Guid id, Event updatedEvent)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest();
         }
-        throw new NotImplementedException();
-
-        // var queriedStudent = await _studentService.GetByIdAsync(id);
-        // if(queriedStudent == null)
-        // {
-        //     return NotFound();
-        // }
-
-        // await _studentService.UpdateAsync(id, updatedStudent);
+        var queriedRecord = await _eventService.GetByIdAsync(id);
+        if(queriedRecord == null)
+        {
+            return NotFound();
+        }
+        await _eventService.UpdateAsync(id, updatedEvent);
 
         return NoContent();
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        // var student = await _studentService.GetByIdAsync(id);
-        // if (student == null)
-        // {
-        //     return NotFound();
-        // }
+        var rec = await _eventService.GetByIdAsync(id);
+        if (rec == null)
+        {
+            return NotFound();
+        }
 
-        // await _studentService.DeleteAsync(id);
+        await _eventService.DeleteAsync(id);
 
         return NoContent();
     }
