@@ -15,6 +15,7 @@ public class EventController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Event>>> GetAll()
     {
+        throw new NotImplementedException();
         // var students = await _studentService.GetAllAsync();
         // return Ok(students);
     }
@@ -22,6 +23,7 @@ public class EventController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Event>> GetById(string id)
     {
+        throw new NotImplementedException();
         // var student = await _studentService.GetByIdAsync(id);
         // if (student == null)
         // {
@@ -50,6 +52,7 @@ public class EventController : ControllerBase
         {
             return BadRequest();
         }
+        throw new NotImplementedException();
 
         // await _studentService.CreateAsync(student);
         // return Ok(student);
@@ -62,6 +65,7 @@ public class EventController : ControllerBase
         {
             return BadRequest();
         }
+        throw new NotImplementedException();
 
         // var queriedStudent = await _studentService.GetByIdAsync(id);
         // if(queriedStudent == null)
