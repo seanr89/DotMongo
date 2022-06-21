@@ -10,9 +10,19 @@ public class EventService
     private readonly IMongoCollection<Event> _events;
     public EventService(AppDbSettings settings)
     {
+        // var client = new MongoClient(new MongoClientSettings
+        //     {
+        //         Server = new MongoServerAddress("localhost", 27017),
+        //         Credential = MongoCredential.CreateCredential(settings.DatabaseName, "sean", "password"),
+        //         UseSsl = true,
+        //         VerifySslCertificate = false,
+        //         SslSettings = new SslSettings
+        //         {
+        //             CheckCertificateRevocation = false
+        //         }
+        //     });
         var client = new MongoClient(settings.ConnectionString);
         var database = client.GetDatabase(settings.DatabaseName);
-        //this._events = events;
         _events = database.GetCollection<Event>(settings.EventsCollectionName);
     }
 
