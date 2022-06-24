@@ -5,16 +5,19 @@ services:
         image: mongo:latest
         container_name: mongo-cont
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: admin-user
-            MONGO_INITDB_ROOT_PASSWORD: admin-pass
-            MONGO_INITDB_DATABASE: eventdb
+        #environment:
+            #MONGO_INITDB_ROOT_USERNAME: admin-user
+           # MONGO_INITDB_ROOT_PASSWORD: admin-pass
+            #MONGO_INITDB_DATABASE: eventdb
+        # environment: 
+        #   - MONGO_INITDB_DATABASE=eventdb
         ports:
             - 27017:27017
         networks: 
             - mongo-compose-network
         volumes:
-            - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            #- ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - ./mongo-volume:/data/db
     mongo-express:
         image: mongo-express
         restart: always
@@ -24,8 +27,8 @@ services:
             - ME_CONFIG_MONGODB_PORT=27017
             #- ME_CONFIG_MONGODB_ENABLE_ADMIN=false
             #- ME_CONFIG_MONGODB_AUTH_DATABASE=admin
-            - ME_CONFIG_MONGODB_AUTH_USERNAME=admin-user
-            - ME_CONFIG_MONGODB_AUTH_PASSWORD=admin-pass
+            #- ME_CONFIG_MONGODB_AUTH_USERNAME=admin-user
+           # - ME_CONFIG_MONGODB_AUTH_PASSWORD=admin-pass
             # - ME_CONFIG_BASICAUTH_USERNAME=dev
             # - ME_CONFIG_BASICAUTH_PASSWORD=dev
         depends_on:

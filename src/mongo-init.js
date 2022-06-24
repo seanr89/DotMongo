@@ -1,5 +1,5 @@
 print('Start creating database ##########################')
-db = db.getSiblingDB('admin');
+//db = db.getSiblingDB('admin');
 // move to the admin db - always created in Mongo
 db.auth('admin-user', 'admin-pass')
 db = db.getSiblingDB('eventdb');
@@ -8,15 +8,15 @@ db.createUser({
     pwd: 'password',
     roles: [
         {
-            role: 'readWrite',
+            role: 'dbOwner',
             db: 'eventdb',
         },
     ],
 });
-db.updateUser("admin",
-{
-    roles : [
-        { role: "dbOwner", db: 'eventDb' }
-      ]
-});
+// db.updateUser("admin",
+// {
+//     roles : [
+//         { role: "dbOwner", db: 'eventDb' }
+//       ]
+// });
 print('End creating database ##########################')
