@@ -8,7 +8,8 @@ namespace MongoAPI.Services;
 public class EventService
 {
     private readonly IMongoCollection<Event> _events;
-    public EventService(AppDbSettings settings)
+    private readonly ILogger<EventService> _logger;
+    public EventService(AppDbSettings settings, ILogger<EventService> logger)
     {
         // var client = new MongoClient(new MongoClientSettings
         //     {
@@ -24,18 +25,22 @@ public class EventService
         var client = new MongoClient(settings.ConnectionString);
         var database = client.GetDatabase(settings.DatabaseName);
         _events = database.GetCollection<Event>(settings.EventsCollectionName);
+        _logger = logger;
     }
 
     public async Task<List<Event>> GetAllAsync()
     {
+        _logger.LogInformation("EventService: GetAllAsync");
         return await _events.Find(s => true).ToListAsync();
     }
     public async Task<Event> GetByIdAsync(Guid id)
     {
+        _logger.LogInformation("EventService: GetByIdAsync");
         return await _events.Find<Event>(s => s.Id == id).FirstOrDefaultAsync();
     }
     public async Task<Event> CreateAsync(Event evnt)
     {
+        _logger.LogInformation("EventService: CreateAsync");
         await _events.InsertOneAsync(evnt);
         return evnt;
     }

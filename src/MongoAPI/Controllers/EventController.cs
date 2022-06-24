@@ -9,6 +9,7 @@ namespace MongoAPI.Controllers;
 public class EventController : ControllerBase
 {
     private readonly EventService _eventService;
+    private readonly ILogger<EventController> _logger;
     public EventController(EventService eventService)
     {
         this._eventService = eventService;

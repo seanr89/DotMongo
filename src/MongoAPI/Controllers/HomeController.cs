@@ -6,4 +6,9 @@ namespace MongoAPI.Controllers;
 [Route("[controller]")]
 public class HomeController : ControllerBase
 {
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok("Alive");
+    }
 }
