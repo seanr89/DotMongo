@@ -5,7 +5,6 @@ using MongoAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
                             .Build();
@@ -22,7 +21,7 @@ builder.Services.Configure<AppDbSettings>(
 builder.Services.AddSingleton<AppDbSettings>(provider =>
                 provider.GetRequiredService<IOptions<AppDbSettings>>().Value);
 
-
+//Initialize the event services once!
 builder.Services.AddSingleton<EventService>();
 
 var app = builder.Build();
@@ -37,7 +36,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 // app.UseAuthorization();
 
-app.MapHealthChecks("/healthz");
+app.MapHealthChecks("/healthcheck");
 
 app.MapControllers();
 

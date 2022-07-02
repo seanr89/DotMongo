@@ -10,11 +10,16 @@ public class EventController : ControllerBase
 {
     private readonly EventService _eventService;
     private readonly ILogger<EventController> _logger;
-    public EventController(EventService eventService)
+    public EventController(EventService eventService, ILogger<EventController> logger)
     {
         this._eventService = eventService;
+        this._logger = logger;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Event>>> GetAll()
     {
@@ -22,6 +27,11 @@ public class EventController : ControllerBase
         return Ok(data);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public async Task<ActionResult<Event>> GetById(Guid id)
     {
@@ -46,6 +56,11 @@ public class EventController : ControllerBase
         return Ok(evnt);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="evnt"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> Create(Event evnt)
     {

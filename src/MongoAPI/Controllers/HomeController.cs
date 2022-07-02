@@ -11,4 +11,14 @@ public class HomeController : ControllerBase
     {
         return Ok("Alive");
     }
+
+    /// <summary>
+    /// TODO: Planned API HealthCheck for DB
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public IActionResult CheckDB()
+    {
+        throw new NotImplementedException();
+    }
 }
