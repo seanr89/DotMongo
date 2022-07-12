@@ -15,14 +15,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
+//Configure AppSettings and Add to DI
 builder.Services.Configure<AppDbSettings>(
                 configuration.GetSection(nameof(AppDbSettings)));
-
 builder.Services.AddSingleton<AppDbSettings>(provider =>
                 provider.GetRequiredService<IOptions<AppDbSettings>>().Value);
 
 //Initialize the event services once!
 builder.Services.AddSingleton<EventService>();
+builder.Services.AddSingleton<EventTypeService>();
 
 var app = builder.Build();
 

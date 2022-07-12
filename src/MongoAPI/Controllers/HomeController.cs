@@ -21,4 +21,13 @@ public class HomeController : ControllerBase
     {
         throw new NotImplementedException();
     }
+
+    /// <summary>
+    /// Planned process to run a seeding job!
+    /// </summary>
+    /// <returns></returns>
+    public IActionResult Seed()
+    {
+        throw new NotImplementedException();
+    }
 }
